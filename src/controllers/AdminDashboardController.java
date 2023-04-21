@@ -7,6 +7,7 @@ package controllers;
 
 import RKinfotech.MysqlMd5;
 import connectivity.ConnectionClass;
+import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -17,7 +18,9 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
@@ -25,6 +28,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import models.User;
 
 /**
@@ -41,7 +45,9 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private TextField email;
     
-    
+    @FXML
+    private StackPane contentStack;
+
 
     @FXML
     private PasswordField password;
@@ -258,6 +264,21 @@ public class AdminDashboardController implements Initializable {
     
     
       }
+     
+     public void home(MouseEvent event )throws IOException{
+                Parent fxml = FXMLLoader.load(getClass().getResource("../views/homeFXML.fxml"));
+                contentStack.getChildren().removeAll();
+                contentStack.getChildren().setAll(fxml);
+     }
+
+    @FXML
+    void categoryPage(MouseEvent event) throws IOException {
+             Parent fxml = FXMLLoader.load(getClass().getResource("../views/CategoryFXML.fxml"));
+                contentStack.getChildren().removeAll();
+                contentStack.getChildren().setAll(fxml);
+  
+    }
+
 
      @Override
     public void initialize(URL url, ResourceBundle rb) {
