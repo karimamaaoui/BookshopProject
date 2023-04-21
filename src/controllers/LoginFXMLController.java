@@ -5,9 +5,11 @@
  */
 package controllers;
 
+import RKinfotech.MysqlMd5;
 import connectivity.ConnectionClass;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +31,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import models.LoginModel;
 import org.controlsfx.control.Notifications;
 
 /**
@@ -38,7 +41,7 @@ import org.controlsfx.control.Notifications;
  */
 public class LoginFXMLController implements Initializable {
 
-       @FXML
+    @FXML
     private PasswordField password;
 
     @FXML
@@ -48,16 +51,22 @@ public class LoginFXMLController implements Initializable {
     private ImageView imageLogo;
     
     
+    LoginModel lg = new LoginModel();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
     }    
     
+    
     @FXML
-    public void login(MouseEvent event) throws IOException, SQLException{
-         String uname = username.getText();
-         String pwd = password.getText();
-        if (uname.equals("") && pwd.equals("")) {
+    public void login(MouseEvent event) throws IOException, SQLException, NoSuchAlgorithmException{
+        String uname = username.getText();
+        String pwd = password.getText();
+        lg.setUsername(username.getText());
+        lg.setPassword(password.getText()); 
+         
+         if (uname.equals("") && pwd.equals("")) {
             
             Alert a = new Alert(Alert.AlertType.WARNING);
             a.setAlertType(Alert.AlertType.WARNING);
@@ -68,24 +77,50 @@ public class LoginFXMLController implements Initializable {
                 ConnectionClass connectionClass = new ConnectionClass();
                 Connection connection = connectionClass.getConnection();
                 System.out.println("connection " +connection);
+                String role="";
 
                 PreparedStatement pst = connection.prepareStatement("select * from user where username=? and password=?");
-                pst.setString(1, uname);
-                pst.setString(2, pwd);
+                
+                String passwordCrypter;
+                passwordCrypter=MysqlMd5.getRKmd5(lg.getPassword());
+                
+                pst.setString(1, lg.getUsername());
+                pst.setString(2, passwordCrypter);
+                
+                
+                   
                 ResultSet resultSet = pst.executeQuery();
                 if (resultSet.next()) {
+                    role=resultSet.getString("role");
+                
+                    if(role.equals("user")){
+                
                     Parent parent = FXMLLoader.load(getClass().getResource("../views/homeFXML.fxml"));
                     Scene scene = new Scene(parent);
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     window.setScene(scene);
                     window.show();
                 }
+                
+                
+                else {
+                    if(role.equals("admin")){
+                    Parent parent = FXMLLoader.load(getClass().getResource("../views/adminDashboard.fxml"));
+                    Scene scene = new Scene(parent);
+                    Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    window.setScene(scene);
+                    window.show();
+                }
+                    
+                }}
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
     
+     
     @FXML
     private void ErrorAlert(){
         Alert alert= new Alert(Alert.AlertType.ERROR);

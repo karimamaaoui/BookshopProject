@@ -31,7 +31,9 @@ import javafx.util.Duration;
 import org.controlsfx.control.*;
 import RKinfotech.MysqlMd5;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
 import javafx.event.ActionEvent;
+import models.RegisterModel;
 
 
 /**
@@ -56,6 +58,8 @@ public class RegisterFXMLController implements Initializable {
     @FXML
     private TextField username;
 
+    RegisterModel rg = new RegisterModel();
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -63,25 +67,58 @@ public class RegisterFXMLController implements Initializable {
     }    
     
     @FXML
-    public void Register(MouseEvent event) throws IOException, SQLException, NoSuchAlgorithmException{
-
-        if(!(username.getText().equals("")) && !(password.getText().equals(""))){
-           try {
-
+    public void checkUser(){
+        try{
             ConnectionClass connectionClass = new ConnectionClass();
             Connection connection = connectionClass.getConnection();
 
+            ResultSet r=connection.createStatement().executeQuery("select * from user ;");
+          
+            while(r.next()){
+                
+                if(rg.getUsername().equals(r.getString("username")))
+                {
+                    Alert alert = new Alert(Alert.AlertType.NONE);
+                    alert.setAlertType(Alert.AlertType.WARNING);
+                    alert.setContentText("username or email already exist ");
+                    alert.show();
+
+                }
+                   
+            }
+            
+        }catch(SQLException e)
+        {
+            System.out.println(e.toString());
+        }
+    }
+    
+    @FXML
+    public void Register(MouseEvent event) throws IOException, SQLException, NoSuchAlgorithmException{
+
+        if(!(username.getText().equals("")) && !(password.getText().equals("")) && !(phone.getText().equals("")) && !(email.getText().equals(""))  ){
+           try {
+
+            rg.setUsername(username.getText());
+            rg.setPassword(password.getText()); 
+            rg.setPhone(phone.getText()); 
+            rg.setEmail(email.getText()); 
+            
+            ConnectionClass connectionClass = new ConnectionClass();
+            Connection connection = connectionClass.getConnection();
+            
             Statement statement = connection.createStatement();
 
+            checkUser();
             PreparedStatement stmt = connection.prepareStatement("INSERT INTO user (`username`, `email`, `password`, `phone`) VALUES (?,?,?,?);");
             String passwordCrypter;
-            passwordCrypter=MysqlMd5.getRKmd5(this.password.getText());
+            passwordCrypter=MysqlMd5.getRKmd5(rg.getPassword());
                    
-            stmt.setString(1, this.username.getText());  
+            stmt.setString(1, rg.getUsername());  
             
             stmt.setString(3,  passwordCrypter);
-            stmt.setString(2,  this.email.getText());
-            stmt.setString(4,  this.phone.getText());
+            stmt.setString(2,  rg.getEmail());
+            stmt.setString(4,  rg.getPhone());
 
            int status = stmt.executeUpdate();
             if (status > 0) {
@@ -113,7 +150,7 @@ public class RegisterFXMLController implements Initializable {
                   
         }
     
-    @FXML    
+   /* @FXML    
     public void error(){
              Notifications notification = Notifications.create();
              notification.title("Error");
@@ -122,7 +159,7 @@ public class RegisterFXMLController implements Initializable {
              notification.position(Pos.BASELINE_RIGHT);
              notification.show();
              
-    }
+    }*/
     
     @FXML
     private void ErrorAlert(){
