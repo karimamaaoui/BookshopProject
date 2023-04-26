@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import models.Book;
 
 
 
@@ -19,11 +20,14 @@ public class Ebook extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../views/loginFXML.fxml"));
+       Parent root = FXMLLoader.load(getClass().getResource("../views/loginFXML.fxml"));
         primaryStage.setTitle("Welcome");
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root,1000,650));
-        primaryStage.show();}
+        primaryStage.show();
+       
+    
+    }
    
 
     public static void main(String[] args) {

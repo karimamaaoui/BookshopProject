@@ -151,7 +151,7 @@ public class CategoryFXMLController implements Initializable {
       {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
-          ObservableList<Category> categories = FXCollections.observableArrayList();
+        ObservableList<Category> categories = FXCollections.observableArrayList();
        try 
        {
           PreparedStatement pst = connection.prepareStatement("SELECT label FROM category");  

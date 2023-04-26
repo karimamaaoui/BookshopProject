@@ -105,7 +105,7 @@ public class LoginFXMLController implements Initializable {
                 
                 else {
                     if(role.equals("admin")){
-                    Parent parent = FXMLLoader.load(getClass().getResource("../views/adminDashboard.fxml"));
+                    Parent parent = FXMLLoader.load(getClass().getResource("../views/adminDashboardFXML.fxml"));
                     Scene scene = new Scene(parent);
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     window.setScene(scene);

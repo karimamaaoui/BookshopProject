@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1315.0" styleClass="gradient-backgound" stylesheets="@admindashboard.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminDashboardController">
-   <top>
+  <top>
       <HBox prefHeight="65.0" prefWidth="290.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="66.0" prefWidth="282.0" text="Admin Dashboard" textFill="WHITE">
@@ -53,7 +53,8 @@
          </children>
       </HBox>
    </top>
-   <left>
+   
+     <left>
       <VBox prefHeight="825.0" prefWidth="224.0" spacing="10.0" styleClass="container" stylesheets="@admindashboard.css" BorderPane.alignment="TOP_CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -92,7 +93,7 @@
                               <Image url="@../images/dashboard.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Dashboard" textFill="#968c8c">
+                        <Label onMouseClicked="#home" prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Dashboard" textFill="#968c8c">
                            <font>
                               <Font name="Bodoni MT Condensed" size="26.0" />
                            </font>
@@ -109,7 +110,7 @@
                               <Insets left="13.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label fx:id="category" onMouseClicked="#categoryPage" prefHeight="31.0" prefWidth="162.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Inbox" textFill="#968c8c">
+                        <Label fx:id="category" onMouseClicked="#categoryPage" prefHeight="31.0" prefWidth="162.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Categories" textFill="#968c8c">
                            <font>
                               <Font name="Bodoni MT Condensed" size="26.0" />
                            </font>
@@ -126,7 +127,7 @@
                               <Image url="@../images/Suggestions.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Suggestions" textFill="#968c8c">
+                        <Label onMouseClicked="#bookPage" prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Books" textFill="#968c8c">
                            <font>
                               <Font name="Bodoni MT Condensed" size="26.0" />
                            </font>
@@ -140,7 +141,7 @@
                               <Image url="@../images/meeting.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Meetings" textFill="#968c8c">
+                        <Label prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Categories" textFill="#968c8c">
                            <font>
                               <Font name="Bodoni MT Condensed" size="26.0" />
                            </font>
@@ -154,7 +155,7 @@
                               <Image url="@../images/project.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Projects" textFill="#968c8c">
+                        <Label prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Categories" textFill="#968c8c">
                            <font>
                               <Font name="Bodoni MT Condensed" size="26.0" />
                            </font>
@@ -168,7 +169,7 @@
                               <Image url="@../images/notes.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Notes and Tests" textFill="#968c8c">
+                        <Label prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Categories" textFill="#968c8c">
                            <font>
                               <Font name="Bodoni MT Condensed" size="26.0" />
                            </font>
@@ -182,7 +183,7 @@
                               <Image url="@../images/clients.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Clients" textFill="#968c8c">
+                        <Label prefHeight="14.0" prefWidth="130.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Categories" textFill="#968c8c">
                            <font>
                               <Font name="Bodoni MT Condensed" size="26.0" />
                            </font>
@@ -197,105 +198,86 @@
       </VBox>
    </left>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <opaqueInsets>
-            <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
-         </opaqueInsets>
+      <StackPane fx:id="contentStack" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <StackPane fx:id="contentStack" prefHeight="150.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="0.0" styleClass="container" stylesheets="@admindashboard.css">
+                  <VBox prefHeight="634.0" prefWidth="439.0">
                      <children>
-                        <Label prefHeight="58.0" prefWidth="128.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Users List" textFill="#968c8c">
-                           <font>
-                              <Font name="Bodoni MT Condensed" size="28.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="11.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <HBox prefHeight="274.0" prefWidth="1083.0">
+                        <AnchorPane prefHeight="542.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 0px  15px 15px 0px;">
                            <children>
-                              <HBox prefHeight="530.0" prefWidth="362.0">
-                                 <children>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 0px  15px 15px 0px;">
-                                             <children>
-                                                <TextField fx:id="username" layoutX="113.0" layoutY="196.0" prefHeight="50.0" prefWidth="251.0" promptText="Username" styleClass="inputText" stylesheets="@registerfxml.css" AnchorPane.topAnchor="196.0">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <opaqueInsets>
-                                                      <Insets />
-                                                   </opaqueInsets>
-                                                </TextField>
-                                                <PasswordField fx:id="password" layoutX="113.0" layoutY="329.0" prefHeight="50.0" prefWidth="252.0" promptText="Password" />
-                                                <ImageView fitHeight="109.0" fitWidth="200.0" layoutX="154.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../images/user.jpg" />
-                                                   </image>
-                                                </ImageView>
-                                                <TextField fx:id="email" layoutX="113.0" layoutY="265.0" prefHeight="50.0" prefWidth="252.0" promptText="Email" styleClass="inputText" stylesheets="@registerfxml.css">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <opaqueInsets>
-                                                      <Insets />
-                                                   </opaqueInsets>
-                                                </TextField>
-                                                <TextField fx:id="phone" layoutX="114.0" layoutY="399.0" prefHeight="50.0" prefWidth="252.0" promptText="Phone" styleClass="inputText" stylesheets="@registerfxml.css">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <opaqueInsets>
-                                                      <Insets />
-                                                   </opaqueInsets>
-                                                </TextField>
-                                                <HBox layoutX="6.0" layoutY="487.0" prefHeight="55.0" prefWidth="458.0" />
-                                             </children>
-                                          </AnchorPane>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                              <TableView fx:id="tableViewUsers" prefHeight="517.0" prefWidth="694.0">
-                                <columns>
-                                  <TableColumn fx:id="usernameColumn" prefWidth="139.99999696016312" text="Username" />
-                                  <TableColumn fx:id="emailColumn" prefWidth="152.8000030517578" text="Email" />
-                                    <TableColumn fx:id="passwordColumn" prefWidth="216.7999267578125" text="Password" />
-                                    <TableColumn fx:id="phoneColumn" minWidth="0.0" prefWidth="127.2000732421875" text="Phone" />
-                                </columns>
-                              </TableView>
+                              <TextField fx:id="username" layoutX="113.0" layoutY="196.0" prefHeight="50.0" prefWidth="251.0" promptText="Username" styleClass="inputText" stylesheets="@registerfxml.css" AnchorPane.topAnchor="196.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </TextField>
+                              <PasswordField fx:id="password" layoutX="113.0" layoutY="259.0" prefHeight="50.0" prefWidth="252.0" promptText="Password" />
+                              <ImageView fitHeight="109.0" fitWidth="200.0" layoutX="154.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/user.jpg" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="email" layoutX="114.0" layoutY="326.0" prefHeight="50.0" prefWidth="252.0" promptText="Email" styleClass="inputText" stylesheets="@registerfxml.css">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </TextField>
+                              <TextField fx:id="phone" layoutX="114.0" layoutY="399.0" prefHeight="50.0" prefWidth="252.0" promptText="Phone" styleClass="inputText" stylesheets="@registerfxml.css">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </TextField>
+                              <HBox layoutX="6.0" layoutY="487.0" prefHeight="55.0" prefWidth="458.0" />
+                           </children>
+                        </AnchorPane>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" />
+                              <Button mnemonicParsing="false" onMouseClicked="#addBtn" prefHeight="52.0" prefWidth="95.0" style="-fx-text-fill: white; -fx-background-color: #7D7D7D; -fx-background-radius: 20;" text="Add">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onMouseClicked="#updateBtn" prefHeight="52.0" prefWidth="95.0" style="-fx-text-fill: white; -fx-background-color: #7D7D7D; -fx-background-radius: 20;" text="Update">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" onMouseClicked="#deleteBtn" prefHeight="52.0" prefWidth="95.0" style="-fx-text-fill: white; -fx-background-color: #7D7D7D; -fx-background-radius: 20;" text="Delete">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </HBox>
                      </children>
                   </VBox>
-                  <HBox prefHeight="610.0" prefWidth="1083.0" spacing="20.0" styleClass="container" stylesheets="@admindashboard.css">
-                     <padding>
-                        <Insets bottom="15.0" />
-                     </padding>
+                  <VBox prefHeight="634.0" prefWidth="644.0">
                      <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#addBtn" prefHeight="52.0" prefWidth="95.0" style="-fx-text-fill: white; -fx-background-color: #7D7D7D; -fx-background-radius: 20;" text="Add">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#updateBtn" prefHeight="52.0" prefWidth="95.0" style="-fx-text-fill: white; -fx-background-color: #7D7D7D; -fx-background-radius: 20;" text="Update">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="125.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#deleteBtn" prefHeight="52.0" prefWidth="95.0" style="-fx-text-fill: white; -fx-background-color: #7D7D7D; -fx-background-radius: 20;" text="Delete">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Button>
+                        <TableView fx:id="tableViewUsers" prefHeight="517.0" prefWidth="694.0">
+                           <columns>
+                              <TableColumn fx:id="usernameColumn" prefWidth="139.99999696016312" text="Username" />
+                              <TableColumn fx:id="emailColumn" prefWidth="152.8000030517578" text="Email" />
+                              <TableColumn fx:id="passwordColumn" prefWidth="216.7999267578125" text="Password" />
+                              <TableColumn fx:id="phoneColumn" minWidth="0.0" prefWidth="127.2000732421875" text="Phone" />
+                           </columns>
+                        </TableView>
                      </children>
-                  </HBox>
+                  </VBox>
                </children>
-            </StackPane>
+            </HBox>
          </children>
-      </VBox>
+      </StackPane>
    </center>
+ 
+ 
 </BorderPane>

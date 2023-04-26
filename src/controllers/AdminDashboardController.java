@@ -103,8 +103,6 @@ public class AdminDashboardController implements Initializable {
           
             	Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("User Registation");
-
-		
 		alert.setHeaderText("User Registation");
 		alert.setContentText("Record Addedddd!");
 
@@ -265,6 +263,7 @@ public class AdminDashboardController implements Initializable {
     
       }
      
+    @FXML
      public void home(MouseEvent event )throws IOException{
                 Parent fxml = FXMLLoader.load(getClass().getResource("../views/homeFXML.fxml"));
                 contentStack.getChildren().removeAll();
@@ -279,7 +278,14 @@ public class AdminDashboardController implements Initializable {
   
     }
 
-
+  @FXML
+    void bookPage(MouseEvent event) throws IOException {
+            Parent fxml = FXMLLoader.load(getClass().getResource("../views/BookFXML.fxml"));
+                contentStack.getChildren().removeAll();
+                contentStack.getChildren().setAll(fxml);
+  
+    }
+    
      @Override
     public void initialize(URL url, ResourceBundle rb) {
         table();

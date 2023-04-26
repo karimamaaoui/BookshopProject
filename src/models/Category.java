@@ -26,7 +26,8 @@ public class Category {
     public String getLabel() { 
         return label.get();
     }
-    public void setLabel(String newLabel) { label.set(newLabel); }
+    public void setLabel(String newLabel)
+    { label.set(newLabel); }
 
    
 }
