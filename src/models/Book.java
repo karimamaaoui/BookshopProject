@@ -18,29 +18,41 @@ import models.Status;
 public class Book {
     
     
-    private static int ref=0;
     private StringProperty title,description,Language,author;
-    public Status satuts;
+    public StringProperty status;
     private int pages,year;
     private float price;
-    private Category category;
-    
+    private StringProperty category,ref,image;
     
     public Book(){
-        this.ref++;
-        this.satuts=Status.disponbile;
+        ref = new SimpleStringProperty(this,"ref");
         title = new SimpleStringProperty(this,"title");
         description = new SimpleStringProperty(this,"description");
         Language = new SimpleStringProperty(this,"Language");
         author = new SimpleStringProperty(this,"author");
+        category=new SimpleStringProperty(this,"category");
+        status= new SimpleStringProperty(this,"status");
+        image= new SimpleStringProperty(this,"image");
+
 
     }
     public StringProperty titleProperty() { 
          return title; 
     }
+    
+    public StringProperty imageProperty() { 
+         return image; 
+    }
+    
+    public StringProperty categoryProperty() { 
+         return category; 
+    }
 
         public StringProperty descriptionProperty() { 
          return description; 
+    }
+        public StringProperty refProperty() { 
+         return ref; 
     }
         
         public StringProperty LanguageProperty() { 
@@ -51,14 +63,11 @@ public class Book {
          return author; 
     }
 
-    
-    public static int getRef() {
-        return ref;
+    public StringProperty statusProperty() { 
+         return status; 
     }
 
-    public static void setRef(int ref) {
-        Book.ref = ref;
-    }
+    
 
     public String getTitle() {
         return this.title.get();
@@ -67,6 +76,43 @@ public class Book {
 
     public void setTitle(String newtitle) {
         title.set(newtitle);
+    }
+  
+      public String getImage() {
+        return this.image.get();
+
+    }
+
+    public void setImage(String newImage) {
+        image.set(newImage);
+    }
+  
+      public String getRef() {
+        return this.ref.get();
+
+    }
+
+    public void setRef(String newRef) {
+        ref.set(newRef);
+    }
+  
+    
+    public String getCategory() {
+        return this.category.get();
+
+    }
+
+    public void setCategory(String newCategory) {
+        category.set(newCategory);
+    }
+
+     public String getStatus() {
+        return this.status.get();
+
+    }
+
+    public void setStatus(String newStat) {
+        status.set(newStat);
     }
 
     public String getDescription() {
@@ -93,14 +139,7 @@ public class Book {
         this.author.set(author);
     }
 
-    public Status getSatuts() {
-        return satuts;
-    }
-
-    public void setSatuts(Status satuts) {
-        this.satuts = satuts;
-    }
-
+  
     public int getPages() {
         return pages;
     }
@@ -124,15 +163,6 @@ public class Book {
     public void setPrice(float price) {
         this.price = price;
     }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
 
     
     
