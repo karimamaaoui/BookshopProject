@@ -20,6 +20,7 @@ public class Category {
         label = new SimpleStringProperty(this,"Category");
      }
 
+    
     public StringProperty labelProperty() { 
          return label; 
     }

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
@@ -362,33 +364,36 @@ public class BookFXMLController implements Initializable{
     String title,desc,cat,sta,auth,lan,image,ref;
     int page,year;
     float price;
+    
         
          myIndex = bookTable.getSelectionModel().getSelectedIndex();
          System.out.println("myindex "+myIndex);
             ref = bookTable.getItems().get(myIndex).getRef();   
-            System.out.println("ref "+ref);
+            System.out.println("ref***************** "+ref);
             title = titleinput.getText();
-
             desc = Descriptioninput.getText();
-            cat = categoryInput.getSelectionModel().toString();
-            sta=StatusInput.getSelectionModel().toString();
-            auth=authorInput.getText();
-            lan=LanguageInput.getText();
-          //  page=(int)pagesInput.getText();
+          //  cat = categoryInput.getSelectionModel().toString();
+          //  sta=StatusInput.getSelectionModel().toString();
+           // auth=authorInput.getText();
+           // lan=LanguageInput.getText();
+//            page=Integer.parseInt(pagesInput.getText());
            // year=yearInput.getText();
+           
             
         try 
         {
             
-                ConnectionClass connectionClass = new ConnectionClass();
+            ConnectionClass connectionClass = new ConnectionClass();
             Connection con = connectionClass.getConnection();
-                  System.out.println("title "+title);
 
-          PreparedStatement  pst = con.prepareStatement("update livre set title = ?,description = ?  where ref = ? ");
+            PreparedStatement  pst = con.prepareStatement("update livre set title = ?,description = ?  where ref = ? ");
             pst.setString(1, ref);
             pst.setString(2, title);
             pst.setString(3, desc);
-           // pst.setInt(4, page);
+
+            System.out.println("title "+title);
+            
+          //  pst.setInt(4, page);
             pst.executeUpdate();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("User Registationn");
@@ -399,19 +404,8 @@ public class BookFXMLController implements Initializable{
 
 		alert.showAndWait();
                 table();
-            refInput.setText("");
-            titleinput.setText("");
-            Descriptioninput.setText("");
-            priceInput.setText("");
-            pagesInput.setText("");
-            LanguageInput.setText("");
-            yearInput.setText("");
-            authorInput.setText("");
-            imgInput.setImage(imageVide);
-            textArea.setText("");
-            categoryInput.getSelectionModel().clearSelection();
-            StatusInput.getSelectionModel().clearSelection();
-       
+         
+                
         } 
         catch (SQLException ex)
         {
@@ -424,6 +418,24 @@ public class BookFXMLController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         table();
+           UnaryOperator<TextFormatter.Change> filter = change -> {
+            String input = change.getText();
+            if (input.matches("[0-9]*")) {
+                return change;
+            }
+            return null;
+        };
+        
+        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+        TextFormatter<String> textFormatter1 = new TextFormatter<>(filter);
+        TextFormatter<String> textFormatter2 = new TextFormatter<>(filter);
+
+        priceInput.setTextFormatter(textFormatter);
+        pagesInput.setTextFormatter(textFormatter1);
+        yearInput.setTextFormatter(textFormatter2);
+        
+        
+
     }    
    
 

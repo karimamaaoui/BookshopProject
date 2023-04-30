@@ -69,7 +69,7 @@
                   <Insets />
                </opaqueInsets>
             </TextField>
-            <Button layoutX="236.0" layoutY="507.0" mnemonicParsing="false" onMouseClicked="#goToLogin" style="-fx-background-color: transaprent; -fx-text-fill: #828282;" text="Don't have an account ? Sigin here" />
+            <Button layoutX="236.0" layoutY="507.0" mnemonicParsing="false" onMouseClicked="#goToLogin" style="-fx-background-color: transaprent; -fx-text-fill: #828282;" text="Already have an account ? Sigin here" />
          </children>
       </AnchorPane>
    </children>

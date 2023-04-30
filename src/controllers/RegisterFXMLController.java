@@ -43,7 +43,7 @@ import models.RegisterModel;
  */
 public class RegisterFXMLController implements Initializable {
 
-     @FXML
+    @FXML
     private TextField email;
 
     @FXML
