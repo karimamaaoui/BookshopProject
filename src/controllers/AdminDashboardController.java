@@ -165,8 +165,9 @@ public class AdminDashboardController implements Initializable {
          myIndex = tableViewUsers.getSelectionModel().getSelectedIndex();
          
         usrname = tableViewUsers.getItems().get(myIndex).getUsername();   
-           
             stname = email.getText();
+           System.out.println("username "+stname);
+
             mobile = phone.getText();
             passwd = password.getText();
         try 
@@ -174,7 +175,7 @@ public class AdminDashboardController implements Initializable {
                 ConnectionClass connectionClass = new ConnectionClass();
             Connection con = connectionClass.getConnection();
       
-          PreparedStatement  pst = con.prepareStatement("update user set email = ?,password = ? ,phone = ? where username = ? ");
+            PreparedStatement  pst = con.prepareStatement("update user set email = ?,password = ? ,phone = ? where username = ? ");
             pst.setString(1, stname);
             pst.setString(2, passwd);
             pst.setString(3, mobile);

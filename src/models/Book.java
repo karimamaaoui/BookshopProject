@@ -18,7 +18,7 @@ import models.Status;
 public class Book {
     
     
-    private StringProperty title,description,Language,author;
+    private StringProperty title,description,language,author;
     public StringProperty status;
     private int pages,year;
     private float price;
@@ -28,7 +28,7 @@ public class Book {
         ref = new SimpleStringProperty(this,"ref");
         title = new SimpleStringProperty(this,"title");
         description = new SimpleStringProperty(this,"description");
-        Language = new SimpleStringProperty(this,"Language");
+        language = new SimpleStringProperty(this,"language");
         author = new SimpleStringProperty(this,"author");
         category=new SimpleStringProperty(this,"category");
         status= new SimpleStringProperty(this,"status");
@@ -56,7 +56,7 @@ public class Book {
     }
         
         public StringProperty LanguageProperty() { 
-         return Language; 
+         return language; 
     }
         
         public StringProperty authorProperty() { 
@@ -124,11 +124,11 @@ public class Book {
     }
 
     public String getLanguage() {
-        return Language.get();
+        return language.get();
     }
 
     public void setLanguage(String Language) {
-        this.Language.set(Language);
+        this.language.set(Language);
     }
 
     public String getAuthor() {

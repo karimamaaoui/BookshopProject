@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane id="AnchorPane" prefHeight="676.0" prefWidth="1004.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.OrderFxmlController">
+    <stylesheets>
+        <URL value="@orderfxml.css" />
+    </stylesheets>
+   <children>
+      <HBox layoutX="10.0" layoutY="1.0" prefHeight="52.0" prefWidth="643.0">
+         <children>
+            <Label text="Book" />
+            <VBox prefHeight="46.0" prefWidth="89.0" />
+            <VBox prefHeight="78.0" prefWidth="31.0" />
+            <VBox layoutX="177.0" layoutY="10.0" prefHeight="78.0" prefWidth="31.0" />
+         </children>
+      </HBox>
+      <VBox prefHeight="58.0" prefWidth="503.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="582.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#addBtn" prefHeight="32.0" prefWidth="98.0" style="-fx-text-fill: white; -fx-background-color: #7D7D7D; -fx-background-radius: 20;" text="Add">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#updateBtn" prefHeight="37.0" prefWidth="98.0" style="-fx-text-fill: white; -fx-background-color: #7D7D7D; -fx-background-radius: 20;" text="Update">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#deleteBtn" prefHeight="30.0" prefWidth="92.0" style="-fx-text-fill: white; -fx-background-color: #7D7D7D; -fx-background-radius: 20;" text="Delete">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <TableView fx:id="tableViewUsers" layoutX="9.0" layoutY="408.0" prefHeight="260.0" prefWidth="960.0">
+         <columns>
+            <TableColumn fx:id="refColumn" prefWidth="95.99999696016312" text="ref" />
+            <TableColumn fx:id="titleColumn" prefWidth="88.00006103515625" text="title" />
+            <TableColumn fx:id="authorColumn" prefWidth="84.00013732910156" text="author" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
+            <TableColumn fx:id="pageColumn" prefWidth="75.0" text="page" />
+            <TableColumn fx:id="priceColumn" prefWidth="75.0" text="price" />
+            <TableColumn fx:id="yearColumn" prefWidth="75.0" text="Year" />
+            <TableColumn fx:id="languageColumn" prefWidth="75.0" text="Language" />
+         </columns>
+      </TableView>
+      <VBox layoutX="1.0" layoutY="51.0" prefHeight="355.0" prefWidth="960.0">
+         <children>
+            <HBox prefHeight="38.0" prefWidth="960.0" />
+            <HBox prefHeight="63.0" prefWidth="960.0">
+               <children>
+                  <VBox layoutX="262.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="74.0" text="Reference" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="ref" prefHeight="50.0" prefWidth="157.0" promptText="Refernce" styleClass="inputText" stylesheets="@registerfxml.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+                  <VBox layoutX="268.0" layoutY="10.0" prefHeight="100.0" prefWidth="24.0" />
+                  <VBox prefHeight="100.0" prefWidth="44.0">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="74.0" text="Title" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="title" prefHeight="50.0" prefWidth="187.0" promptText="title" styleClass="inputText" stylesheets="@registerfxml.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+                  <VBox layoutX="292.0" layoutY="10.0" prefHeight="100.0" prefWidth="44.0">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="74.0" text="Page" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="page" layoutX="336.0" layoutY="10.0" prefHeight="50.0" prefWidth="187.0" promptText="page" styleClass="inputText" stylesheets="@registerfxml.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+                  <VBox layoutX="523.0" layoutY="10.0" prefHeight="100.0" prefWidth="44.0">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="74.0" text="Price" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="price" layoutX="567.0" layoutY="10.0" prefHeight="50.0" prefWidth="187.0" promptText="price" styleClass="inputText" stylesheets="@registerfxml.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="62.0" prefWidth="960.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="74.0" text="Description" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="description" prefHeight="50.0" prefWidth="161.0" promptText="Description" styleClass="inputText" stylesheets="@registerfxml.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+                  <VBox prefHeight="62.0" prefWidth="16.0" />
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="62.0" prefWidth="47.0">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="42.0" text="Author" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="author" prefHeight="50.0" prefWidth="188.0" promptText="Author" styleClass="inputText" stylesheets="@registerfxml.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="74.0" text="Year" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="year" layoutX="110.0" layoutY="10.0" prefHeight="50.0" prefWidth="161.0" promptText="year" styleClass="inputText" stylesheets="@registerfxml.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+                  <VBox layoutX="523.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label prefHeight="38.0" prefWidth="74.0" text="Language" />
+                     </children>
+                  </VBox>
+                  <TextField fx:id="language" layoutX="623.0" layoutY="10.0" prefHeight="50.0" prefWidth="161.0" promptText="language" styleClass="inputText" stylesheets="@registerfxml.css">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+    
+</Pane>

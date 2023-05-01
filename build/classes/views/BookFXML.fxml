@@ -20,13 +20,13 @@
         <URL value="@bookfxml.css" />
     </stylesheets>
    <children>
-      <HBox layoutY="5.0" prefHeight="78.0" prefWidth="643.0">
+      <HBox layoutY="5.0" prefHeight="38.0" prefWidth="643.0">
          <children>
             <Label text="Book" />
             <VBox prefHeight="46.0" prefWidth="89.0" />
             <Button fx:id="deleteBtn" mnemonicParsing="false" onMouseClicked="#deleteClick" text="Delete" />
             <VBox prefHeight="78.0" prefWidth="31.0" />
-            <Button fx:id="updateBtn" mnemonicParsing="false" onMouseClicked="#updateClick" text="Update" />
+            <Button fx:id="updateBtn" mnemonicParsing="false" onMouseClicked="#updateBtn" text="Update" />
             <VBox layoutX="177.0" layoutY="10.0" prefHeight="78.0" prefWidth="31.0" />
             <Button fx:id="addBtn" mnemonicParsing="false" onMouseClicked="#addClick" text="add" />
          </children>

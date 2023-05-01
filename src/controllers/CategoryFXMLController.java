@@ -119,7 +119,7 @@ public class CategoryFXMLController implements Initializable {
          myIndex = catTable.getSelectionModel().getSelectedIndex();
          
         lab = catTable.getItems().get(myIndex).getLabel();   
-           
+        System.out.println("lab"+lab);
         try 
         {
             ConnectionClass connectionClass = new ConnectionClass();
