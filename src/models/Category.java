@@ -13,13 +13,17 @@ import javafx.beans.property.StringProperty;
  * @author user
  */
 public class Category {
+
      private final StringProperty label;
+     private String labe;
      
     public Category()
     {
         label = new SimpleStringProperty(this,"Category");
      }
-
+public Category(String label) {
+        this.label = new SimpleStringProperty(this, "label", label);
+    }
     
     public StringProperty labelProperty() { 
          return label; 
@@ -30,5 +34,8 @@ public class Category {
     public void setLabel(String newLabel)
     { label.set(newLabel); }
 
-   
+    public static Category valueOf(String lab) {
+        return new Category(lab.toString());
+    }
+    
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -14,50 +15,83 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane id="AnchorPane" prefHeight="589.0" prefWidth="876.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BookFXMLController">
+<Pane id="AnchorPane" prefHeight="594.0" prefWidth="1015.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BookFXMLController">
     <stylesheets>
         <URL value="@bookfxml.css" />
     </stylesheets>
    <children>
-      <HBox layoutY="5.0" prefHeight="38.0" prefWidth="643.0">
+      <HBox layoutX="14.0" layoutY="5.0" prefHeight="38.0" prefWidth="629.0">
          <children>
-            <Label text="Book" />
+            <Label prefHeight="27.0" prefWidth="111.0" text="Book List">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font></Label>
             <VBox prefHeight="46.0" prefWidth="89.0" />
-            <Button fx:id="deleteBtn" mnemonicParsing="false" onMouseClicked="#deleteClick" text="Delete" />
+            <Button fx:id="deleteBtn" mnemonicParsing="false" onMouseClicked="#deleteClick" prefHeight="38.0" prefWidth="66.0" style="-fx-background-color: #7EE0FF; -fx-text-fill: white; -fx-background-radius: 14;" text="Delete">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
             <VBox prefHeight="78.0" prefWidth="31.0" />
-            <Button fx:id="updateBtn" mnemonicParsing="false" onMouseClicked="#updateBtn" text="Update" />
+            <Button fx:id="updateBtn" mnemonicParsing="false" onMouseClicked="#updateBtn" prefHeight="38.0" prefWidth="66.0" style="-fx-background-color: #7EE0FF; -fx-text-fill: white; -fx-background-radius: 14;" text="Update">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
             <VBox layoutX="177.0" layoutY="10.0" prefHeight="78.0" prefWidth="31.0" />
-            <Button fx:id="addBtn" mnemonicParsing="false" onMouseClicked="#addClick" text="add" />
+            <Button fx:id="addBtn" mnemonicParsing="false" onMouseClicked="#addClick" prefHeight="38.0" prefWidth="66.0" style="-fx-background-color: #7EE0FF; -fx-text-fill: white; -fx-background-radius: 14;" text="Add">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
          </children>
       </HBox>
       <HBox layoutY="59.0" prefHeight="269.0" prefWidth="758.0">
          <children>
-            <VBox layoutX="10.0" layoutY="10.0" prefHeight="287.0" prefWidth="758.0">
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="228.0" prefWidth="849.0">
                <children>
                   <VBox prefHeight="243.0" prefWidth="822.0">
                      <children>
-                        <AnchorPane prefHeight="203.0" prefWidth="831.0">
+                        <AnchorPane prefHeight="206.0" prefWidth="840.0">
                            <children>
                               <Label layoutX="16.0" layoutY="53.0" prefHeight="18.0" prefWidth="33.0" text="Title" />
-                              <TextField fx:id="titleinput" layoutX="80.0" layoutY="44.0" />
-                              <TextField fx:id="Descriptioninput" layoutX="80.0" layoutY="80.0" />
+                              <TextField fx:id="titleinput" layoutX="80.0" layoutY="44.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></TextField>
+                              <TextField fx:id="Descriptioninput" layoutX="80.0" layoutY="80.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></TextField>
                               <Label layoutX="13.0" layoutY="88.0" text="Description" />
-                              <TextField fx:id="pagesInput" layoutX="80.0" layoutY="120.0" />
+                              <TextField fx:id="pagesInput" layoutX="80.0" layoutY="120.0" promptText="0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></TextField>
                               <Label layoutX="14.0" layoutY="126.0" text="Pages" />
                               <Label layoutX="271.0" layoutY="143.0" text="Category" />
                               <Label layoutX="272.0" layoutY="181.0" text="Status" />
-                              <TextField fx:id="LanguageInput" layoutX="82.0" layoutY="164.0" />
+                              <TextField fx:id="LanguageInput" layoutX="82.0" layoutY="164.0" promptText="English">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></TextField>
                               <Label layoutX="15.0" layoutY="168.0" text="Language" />
                               <Label layoutX="275.0" layoutY="18.0" text="Price" />
-                              <TextField fx:id="priceInput" layoutX="333.0" layoutY="10.0" />
                               <Label layoutX="275.0" layoutY="102.0" text="Year" />
-                              <TextField fx:id="authorInput" layoutX="334.0" layoutY="50.0" />
-                              <TextField fx:id="yearInput" layoutX="334.0" layoutY="95.0" />
+                              <TextField fx:id="authorInput" layoutX="334.0" layoutY="50.0" prefHeight="30.0" prefWidth="174.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></TextField>
+                              <TextField fx:id="yearInput" layoutX="334.0" layoutY="95.0" prefHeight="30.0" prefWidth="174.0" promptText="xxxx">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></TextField>
                               <Label layoutX="277.0" layoutY="54.0" text="Author" />
-                              <ComboBox fx:id="categoryInput" layoutX="334.0" layoutY="135.0" onMouseClicked="#showCategory" prefWidth="150.0" promptText="Choose Category" />
-                              <ComboBox fx:id="StatusInput" layoutX="333.0" layoutY="177.0" onMouseClicked="#showStatus" prefWidth="150.0" promptText="Choose Status" />
-                              <TextField fx:id="refInput" layoutX="82.0" layoutY="5.0" />
+                              <ComboBox fx:id="categoryInput" layoutX="334.0" layoutY="135.0" onMouseClicked="#showCategory" prefHeight="26.0" prefWidth="174.0" promptText="Choose Category" />
+                              <ComboBox fx:id="StatusInput" layoutX="333.0" layoutY="177.0" onMouseClicked="#showStatus" prefHeight="26.0" prefWidth="174.0" promptText="Choose Status" />
+                              <TextField fx:id="refInput" layoutX="82.0" layoutY="5.0" promptText="xxxx">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font></TextField>
                               <Label layoutX="13.0" layoutY="9.0" text="Reference" />
                               <ImageView fx:id="imgInput" fitHeight="109.0" fitWidth="200.0" layoutX="544.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -65,11 +99,19 @@
                                  </image>
                               </ImageView>
                               <Label layoutX="544.0" layoutY="18.0" text="Image" />
-                              <Button layoutX="690.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#addImage" text="add image" />
-                              <TextArea fx:id="textArea" layoutX="539.0" layoutY="167.0" prefHeight="26.0" prefWidth="150.0" />
+                              <Button layoutX="774.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#addImage" prefHeight="38.0" prefWidth="74.0" text="add image" />
+                              <TextArea fx:id="textArea" layoutX="544.0" layoutY="165.0" prefHeight="38.0" prefWidth="218.0" />
+                              <TextField fx:id="price" layoutX="333.0" layoutY="11.0" prefHeight="30.0" prefWidth="174.0" promptText="0" styleClass="inputText" stylesheets="@registerfxml.css">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </TextField>
                            </children>
                         </AnchorPane>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="38.0" prefWidth="800.0">
                            <children>
                               <VBox prefHeight="72.0" prefWidth="24.0" />
                               <VBox prefHeight="72.0" prefWidth="35.0" />
@@ -82,9 +124,9 @@
             </VBox>
          </children>
       </HBox>
-      <HBox layoutX="-3.0" layoutY="394.0" prefHeight="181.0" prefWidth="882.0">
+      <HBox layoutX="-3.0" layoutY="289.0" prefHeight="305.0" prefWidth="995.0">
          <children>
-            <TableView fx:id="bookTable" prefHeight="182.0" prefWidth="878.0">
+            <TableView fx:id="bookTable" prefHeight="186.0" prefWidth="995.0">
               <columns>
                 <TableColumn fx:id="refColumn" prefWidth="52.799989342689514" text="Ref" />
                   <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
@@ -95,7 +137,8 @@
                   <TableColumn fx:id="languageColumn" prefWidth="65.60003662109375" text="Language" />
                   <TableColumn fx:id="yearColumn" prefWidth="106.39996337890625" text="Year" />
                   <TableColumn fx:id="priceColumn" prefWidth="74.4000244140625" text="Price" />
-                  <TableColumn fx:id="authorColumn" prefWidth="121.5999755859375" text="Author" />
+                  <TableColumn fx:id="authorColumn" prefWidth="91.19989013671875" text="Author" />
+                  <TableColumn fx:id="imgColumn" prefWidth="139.2000732421875" text="Image" />
               </columns>
             </TableView>
          </children>
