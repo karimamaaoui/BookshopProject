@@ -32,6 +32,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import models.User;
+import models.UserSession;
 
 /**
  * FXML Controller class
@@ -292,14 +293,17 @@ public class AdminDashboardController implements Initializable {
                 contentStack.getChildren().setAll(fxml);
   
     }
-     public void setUsername(String username) {
+    
+    
+    public void setUsername(String username) {
         getCurrentUser.setText(username);
     }
     
      @Override
     public void initialize(URL url, ResourceBundle rb) {
         table();
-        
+        String currentUser = UserSession.getCurrentUsername();
+         System.out.println("current user from admin "+currentUser);        
     }    
     
     

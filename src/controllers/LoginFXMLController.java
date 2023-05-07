@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import models.LoginModel;
+import models.UserSession;
 import org.controlsfx.control.Notifications;
 
 /**
@@ -93,6 +94,7 @@ public class LoginFXMLController implements Initializable {
                 ResultSet resultSet = pst.executeQuery();
                 if (resultSet.next()) {      
                     currentUser = resultSet.getString("username");
+                    UserSession.setCurrentUsername(resultSet.getString("username"));
 
                     role=resultSet.getString("role");
                 
@@ -102,7 +104,7 @@ public class LoginFXMLController implements Initializable {
 
                        // Parent parent = FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
                        Parent root = loader.load();
-
+                        System.out.println("current from login "+currentUser);
                         HomeFXMLController controller = loader.getController();
                         controller.setUsername(currentUser);
                    

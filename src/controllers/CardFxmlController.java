@@ -32,6 +32,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import models.Book;
+import models.UserSession;
 
 /**
  * FXML Controller class
@@ -50,18 +51,25 @@ public class CardFxmlController implements Initializable {
 
     @FXML
     private HBox box;
+ @FXML
+    private Label getCurrentUser;
+    private String currentUser;
 
     @FXML
     void handleBookSelection(MouseEvent event) {
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+      public void setUsername(String username) {
+        //getCurrentUser.setText(username);
+         currentUser = username;
+         currentUser = UserSession.getCurrentUsername();
+
     }
 
+
     private String[] colors = {"B9E5FF", "BDB2FE", "FB9AAB", "FF5856"};
-private void showBookDetails(Book book) {
+    private void showBookDetails(Book book) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/bookDetailsFXML.fxml"));
             Parent root = loader.load();
@@ -91,4 +99,10 @@ private void showBookDetails(Book book) {
         });
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    String currentUser = UserSession.getCurrentUsername();
+    System.out.println("current user from cart "+currentUser);        
+ 
+    }
 }
