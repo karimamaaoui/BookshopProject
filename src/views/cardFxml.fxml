@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="400.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CardFxmlController">
+<HBox fx:id="box" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleBookSelection" prefHeight="177.0" prefWidth="400.0" spacing="15.0" style="-fx-background-radius: 20;" styleClass="shadow" stylesheets="@cardfxml.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CardFxmlController">
    <children>
       <ImageView fx:id="bookImage" fitHeight="155.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true" />
       <VBox prefHeight="186.0" prefWidth="22.0" />
@@ -20,7 +19,7 @@
                   <HBox prefHeight="26.0" prefWidth="258.0" />
                </children>
             </VBox>
-            <VBox prefHeight="186.0" prefWidth="269.0">
+            <VBox prefHeight="186.0" prefWidth="269.0" styleClass="Hboxclass" stylesheets="@cardfxml.css">
                <children>
                   <Label fx:id="titleLabel" prefHeight="39.0" prefWidth="135.0" />
                   <Label fx:id="authorLabel" layoutX="10.0" layoutY="10.0" prefHeight="39.0" prefWidth="135.0" />

@@ -6,6 +6,7 @@
 package controllers;
 
 import connectivity.ConnectionClass;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.Blob;
@@ -14,15 +15,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import models.Book;
 
@@ -41,22 +48,47 @@ public class CardFxmlController implements Initializable {
     @FXML
     private ImageView bookImage;
 
-  
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("hello from 156");
+    @FXML
+    private HBox box;
 
-       // showBooks();
+    @FXML
+    void handleBookSelection(MouseEvent event) {
+
     }
 
-    void setData(Book book) {
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    }
+
+    private String[] colors = {"B9E5FF", "BDB2FE", "FB9AAB", "FF5856"};
+private void showBookDetails(Book book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/bookDetailsFXML.fxml"));
+            Parent root = loader.load();
+            BookDetailsController controller = loader.getController();
+            controller.setSelectedBook(book);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+    public void setData(Book book) {
         Image image = book.getImage();
         titleLabel.setText(book.getTitle());
         authorLabel.setText(book.getAuthor());
 
         bookImage.setImage(image);
-        
+        box.setStyle("-fx-background-color : #" + colors[(int) (Math.random() * colors.length)] + ";"
+                + "-fx-background-radius: 20;"
+                + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0),10,0,0,10)"
+        );
 
+        box.setOnMouseClicked(event -> {
+            showBookDetails(book);
+        });
     }
 
 }
