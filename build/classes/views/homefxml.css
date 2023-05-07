@@ -1,7 +1,9 @@
 /*
  * Empty Stylesheet file.
  */
-
-.mainFxmlClass {
-
+.white-back{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100% ,#a0e8ff,#a0e8ff );
+}
+.transparent{
+    -fx-background-color:#fff;
 }

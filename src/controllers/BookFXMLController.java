@@ -570,10 +570,7 @@ public class BookFXMLController implements Initializable {
         }
 
         @Override
-        public void initialize
-        (URL url, ResourceBundle rb
-        
-            ) {
+        public void initialize(URL url, ResourceBundle rb) {
         table();
             UnaryOperator<TextFormatter.Change> filter = change -> {
                 String input = change.getText();

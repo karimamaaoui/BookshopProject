@@ -103,7 +103,7 @@ public class LoginFXMLController implements Initializable {
                        // Parent parent = FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
                        Parent root = loader.load();
 
-                        AdminDashboardController controller = loader.getController();
+                        HomeFXMLController controller = loader.getController();
                         controller.setUsername(currentUser);
                    
                      //   Parent parent = FXMLLoader.load(getClass().getResource("../views/homeFXML.fxml"));
