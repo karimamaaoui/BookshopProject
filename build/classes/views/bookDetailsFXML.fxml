@@ -1,92 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BookDetailsController">
-       <stylesheets>
-        <URL value="@bookdetailsfxml.css" />
-    </stylesheets>
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BookDetailsController">
     <children>
-      <HBox prefHeight="145.0" prefWidth="486.0">
-         <children>
-            <VBox prefHeight="134.0" prefWidth="153.0">
-               <children>
-                  <Label prefHeight="46.0" prefWidth="98.0" text="Image book">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="10.0" prefHeight="57.0" prefWidth="98.0">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="56.0" prefHeight="46.0" prefWidth="98.0" text="title book">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="10.0" prefHeight="46.0" prefWidth="98.0" text="author book">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="103.0" prefHeight="46.0" prefWidth="98.0" text="Image book">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="149.0" prefHeight="46.0" prefWidth="98.0" text="Image book">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="196.0" prefHeight="46.0" prefWidth="98.0" text="Image book">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="242.0" prefHeight="46.0" prefWidth="98.0" text="Image book">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox layoutX="10.0" layoutY="10.0" prefHeight="360.0" prefWidth="332.0">
-               <children>
-                  <ImageView fx:id="bookImage" fitHeight="68.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="bookTitle" prefHeight="32.0" prefWidth="200.0" text="Title" />
-                  <Label fx:id="bookAuthor" prefHeight="32.0" prefWidth="200.0" text="Author" />
-                  <Label fx:id="bookDescription" prefHeight="32.0" prefWidth="200.0" text="Description" />
-                  <Label fx:id="pagesLabel" prefHeight="32.0" prefWidth="200.0" text="Pages" />
-                  <Label fx:id="categoryLabel" prefHeight="32.0" prefWidth="200.0" text="Category" />
-                  <Label fx:id="statusLabel" prefHeight="32.0" prefWidth="200.0" text="Status" />
-                  <Label fx:id="languageLabel" prefHeight="32.0" prefWidth="200.0" text="Language" />
-                  <Label fx:id="yearLabel" prefHeight="32.0" prefWidth="200.0" text="Year" />
-                  <Label fx:id="priceLabel" prefHeight="32.0" prefWidth="200.0" text="Price" />
-                  <Label fx:id="bookTitle1" prefHeight="32.0" prefWidth="200.0" text="Title" />
-               </children>
-            </VBox>
-            <Button onAction="#addToCart" prefHeight="26.0" prefWidth="130.0" text="Add to Cart" />
-
-         </children>
-      </HBox>
-      <Label fx:id="getCurrentUser" prefHeight="34.0" prefWidth="167.0" styleClass="shadow" stylesheets="@admindashboard.css" textFill="RED">
-         <font>
-            <Font name="Bodoni MT Condensed" size="28.0" />
-         </font>
-      </Label>
-      <TextField fx:id="qteInput" prefHeight="30.0" prefWidth="205.0" promptText="0" styleClass="inputText" stylesheets="@registerfxml.css">
+        <Label layoutX="256.0" layoutY="51.0" text="Title" textAlignment="CENTER">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="256.0" layoutY="96.0" text="Author" textAlignment="CENTER">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="256.0" layoutY="136.0" text="Price" textAlignment="CENTER">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="256.0" layoutY="176.0" text="Page" textAlignment="CENTER">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="256.0" layoutY="216.0" text="Description" textAlignment="CENTER">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Button layoutX="461.0" layoutY="353.0" mnemonicParsing="false" onAction="#addToCart" style="-fx-background-color: #2AB5E1;" text="Add to Cart" textFill="WHITE" />
+      <ImageView fx:id="bookImage" fitHeight="290.0" fitWidth="200.0" layoutX="14.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="bookTitle" layoutX="342.0" layoutY="51.0" prefHeight="27.0" prefWidth="168.0" text="Label" />
+      <Label fx:id="bookAuthor" layoutX="330.0" layoutY="100.0" prefHeight="26.0" prefWidth="131.0" text="Label" />
+      <Label fx:id="bookPage" layoutX="342.0" layoutY="168.0" prefHeight="30.0" prefWidth="178.0" text="Label" />
+      <Label fx:id="priceLabel" layoutX="326.0" layoutY="136.0" prefHeight="27.0" prefWidth="200.0" text="Label" />
+      <TextField fx:id="qteInput" layoutX="384.0" layoutY="350.0" prefHeight="30.0" prefWidth="55.0" promptText="0" styleClass="inputText" stylesheets="@registerfxml.css">
          <font>
             <Font size="14.0" />
          </font>
@@ -94,5 +49,19 @@
             <Insets />
          </opaqueInsets>
       </TextField>
-   </children>
-</VBox>
+      <Label layoutX="251.0" layoutY="256.0" text="Status" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="bookDescription" layoutX="351.0" layoutY="214.0" prefHeight="30.0" prefWidth="178.0" text="Label" />
+      <Label fx:id="bookStatus" layoutX="336.0" layoutY="254.0" prefHeight="30.0" prefWidth="178.0" text="Label" />
+      <Label layoutX="252.0" layoutY="295.0" prefHeight="27.0" prefWidth="97.0" text="Language" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="bookLanguage" layoutX="337.0" layoutY="293.0" prefHeight="30.0" prefWidth="178.0" text="Label" />
+      <Label fx:id="bookLanguage1" layoutX="326.0" layoutY="350.0" prefHeight="30.0" prefWidth="49.0" text="Qunatity" />
+    </children>
+</AnchorPane>

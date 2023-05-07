@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,6 +37,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.Book;
 import models.UserSession;
 
@@ -50,7 +52,7 @@ public class HomeFXMLController implements Initializable {
     private Label getCurrentUser;
     private String currentUser;
 
-@FXML
+    @FXML
     private GridPane bookContainer;
 
     @FXML
@@ -67,8 +69,8 @@ public class HomeFXMLController implements Initializable {
      */
     public void setUsername(String username) {
         //getCurrentUser.setText(username);
-         this.currentUser = username;
-        getCurrentUser.setText(currentUser);
+        this.currentUser = username;
+        currentUser = UserSession.getCurrentUsername();
     }
 
     @FXML
@@ -97,7 +99,7 @@ public class HomeFXMLController implements Initializable {
         ImageView imageVie = null;
 
         try {
-            PreparedStatement pst = connection.prepareStatement("SELECT ref,title,description,Pages,category,status,language, Year, price, author,image FROM livre  LIMIT 4");
+            PreparedStatement pst = connection.prepareStatement("SELECT ref,title,description,Pages,category,status,language, Year, price, author,image FROM livre ");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 int i = 1;
@@ -138,7 +140,29 @@ public class HomeFXMLController implements Initializable {
 
     }
 
-      public List<Book> Books() {
+    @FXML
+    public void paymentPage(MouseEvent event) throws IOException {
+
+//    FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/paymentFXML.fxml"));
+        //  Parent root = loader.load();
+        //  PaymentFXMLController controller = loader.getController();
+        //      Parent root = FXMLLoader.load(getClass().getResource("../views/paymentFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/paymentFXML.fxml"));
+
+        // Parent parent = FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
+        Parent root = loader.load();
+
+        PaymentFXMLController controller = loader.getController();
+        controller.setUsername(currentUser);
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    public List<Book> Books() {
 
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
@@ -191,30 +215,29 @@ public class HomeFXMLController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  
+
         String currentUser = UserSession.getCurrentUsername();
-        
+
         recentlyList = new ArrayList<>(showBooks());
-        recommended=new ArrayList<>(Books());
+        /*   recommended=new ArrayList<>(Books());
         int column=0;
         int row=1;
-        
+         */
         try {
-        for (int i = 0; i < recentlyList.size(); i++) {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("../views/cardFxml.fxml"));
+            for (int i = 0; i < recentlyList.size(); i++) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("../views/cardFxml.fxml"));
 
                 // Parent parent = FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
-                
                 HBox cardBox = loader.load();
                 CardFxmlController controller = loader.getController();
                 controller.setUsername(currentUser);
-                System.out.println("current user from home"+currentUser);
+                System.out.println("current user from home" + currentUser);
                 controller.setData(recentlyList.get(i));
                 cardLayout.getChildren().add(cardBox);
 
             }
-        for (Book book: recommended){
+            /* for (Book book: recommended){
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("../views/smallBookFxml.fxml"));
 
@@ -225,20 +248,21 @@ public class HomeFXMLController implements Initializable {
               //  controller.setUsername(currentUser);
                 smallcontroller.setData(book);
                // cardLayout.getChildren().add(vBox);
-               if (column==6){
+               if (column==5){
                    column=0;
                    ++row;
                }
-               bookContainer.add(vBox,column++,row);
-        }
-        
-        
-        
-        } catch (IOException ex) {
-                Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                   System.out.println("Column"+column);
+                   System.out.println("row"+row);
 
-        
+               bookContainer.add(vBox,column++,row);
+               GridPane.setMargin(vBox, new Insets(10));*/
+
+            //}
+        } catch (IOException ex) {
+            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

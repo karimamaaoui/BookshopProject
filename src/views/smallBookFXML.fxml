@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="box" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="180.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SmallBookFXMLController">
+<VBox fx:id="box" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="180.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SmallBookFXMLController">
    <children>
-      <ImageView fx:id="bookImage" fitHeight="251.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <ImageView fx:id="bookImage" fitHeight="207.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox prefHeight="66.0" prefWidth="180.0">
          <children>
             <VBox prefHeight="79.0" prefWidth="22.0" />
-            <VBox layoutX="10.0" layoutY="10.0" prefHeight="79.0" prefWidth="145.0">
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="62.0" prefWidth="146.0">
                <children>
                   <Label fx:id="titleLabel" text="Label" />
                   <Label fx:id="authorLabel" layoutX="10.0" layoutY="10.0" text="Label" />

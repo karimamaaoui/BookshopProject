@@ -35,48 +35,60 @@ public class BookDetailsController implements Initializable {
 
     private Cart cart;
     private PanierFXMLController panier;
-    
+
     private String currentUser;
     @FXML
     private ImageView bookImage;
-@FXML
+    @FXML
     private Label getCurrentUser;
+    
+    @FXML
+    private Label bookPage;
+
+    @FXML
+    private Label bookStatus;
+
     @FXML
     private Label bookTitle;
 
-    private Book selectedBook;
+    @FXML
+    private Label languageLabel;
 
-    
- @FXML
+
+    private Book selectedBook;
+    @FXML
+    private Label bookLanguage;
+
+
+    @FXML
+    private Label priceLabel;
+    @FXML
     public TextField qteInput;
 
     public void setSelectedBook(Book book) {
         selectedBook = book;
         showBookDetails();
     }
-    
-    
-       
 
     @FXML
     public void addToCart() throws IOException {
         //cart.addBook(selectedBook);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/panierFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/panierFXML.fxml"));
 
-                       // Parent parent = FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
-                       Parent root = loader.load();
+        // Parent parent = FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
+        Parent root = loader.load();
 
-                        PanierFXMLController controller = loader.getController();
-                     //   controller.setUsername(currentUser);
-                     if (qteInput != null){
-                                     System.out.println("QTE " + qteInput.getText());
+        PanierFXMLController controller = loader.getController();
+        //   controller.setUsername(currentUser);
+        if (qteInput != null) {
+            System.out.println("QTE " + qteInput.getText());
 
-                         int qte=Integer.parseInt(qteInput.getText());
-                     controller.addBook(selectedBook,currentUser,qte);
-                     }
-                 
-    //String username = getCurrentUsername(); 
-   // panier.addBook(selectedBook, username);
+            int qte = Integer.parseInt(qteInput.getText());
+            controller.addBook(selectedBook, currentUser, qte);
+        }
+
+        //String username = getCurrentUsername(); 
+        // panier.addBook(selectedBook, username);
     }
 
     private void showBookDetails() {
@@ -85,12 +97,16 @@ public class BookDetailsController implements Initializable {
         bookTitle.setText(selectedBook.getTitle());
         bookAuthor.setText(selectedBook.getAuthor());
         bookDescription.setText(selectedBook.getDescription());
+        bookPage.setText(Integer.toString(selectedBook.getPages()));
+        bookStatus.setText(selectedBook.getStatus());
+        priceLabel.setText(Float.toString(selectedBook.getPrice()));
+        bookLanguage.setText(selectedBook.getLanguage());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         currentUser = UserSession.getCurrentUsername();
-         System.out.println("current user from book details "+currentUser);        
-     }
+        currentUser = UserSession.getCurrentUsername();
+        System.out.println("current user from book details " + currentUser);
+    }
 
 }

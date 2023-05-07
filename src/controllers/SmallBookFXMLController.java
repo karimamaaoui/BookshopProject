@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.Book;
+import models.UserSession;
 
 /**
  * FXML Controller class
@@ -46,10 +47,28 @@ public class SmallBookFXMLController implements Initializable {
         bookImage.setImage(image);
       
       }
+    
+      private void showBookDetails(Book book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/bookDetailsFXML.fxml"));
+            Parent root = loader.load();
+            BookDetailsController controller = loader.getController();
+            controller.setSelectedBook(book);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.toString());
+        }
+    }
+  
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+  String currentUser = UserSession.getCurrentUsername();
+    System.out.println("current user from cart "+currentUser);        
+ 
     }
 
 }

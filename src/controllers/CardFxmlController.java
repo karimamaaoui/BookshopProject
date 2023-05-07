@@ -68,7 +68,9 @@ public class CardFxmlController implements Initializable {
     }
 
 
-    private String[] colors = {"B9E5FF", "BDB2FE", "FB9AAB", "FF5856"};
+   // private String[] colors = {"45b6fe", "3792CB", "296d98", "1c466"};
+    
+    
     private void showBookDetails(Book book) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/bookDetailsFXML.fxml"));
@@ -89,7 +91,7 @@ public class CardFxmlController implements Initializable {
         authorLabel.setText(book.getAuthor());
 
         bookImage.setImage(image);
-        box.setStyle("-fx-background-color : #" + colors[(int) (Math.random() * colors.length)] + ";"
+        box.setStyle("-fx-background-color : #ffff" + ";"
                 + "-fx-background-radius: 20;"
                 + "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0),10,0,0,10)"
         );
