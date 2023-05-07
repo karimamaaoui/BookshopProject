@@ -21,7 +21,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -73,7 +75,8 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private TableColumn<User, String> usernameColumn;
     
-    
+    @FXML
+    private Label getCurrentUser;
     public int myIndex;
 
     @FXML
@@ -172,7 +175,7 @@ public class AdminDashboardController implements Initializable {
             passwd = password.getText();
         try 
         {
-                ConnectionClass connectionClass = new ConnectionClass();
+            ConnectionClass connectionClass = new ConnectionClass();
             Connection con = connectionClass.getConnection();
       
             PreparedStatement  pst = con.prepareStatement("update user set email = ?,password = ? ,phone = ? where username = ? ");
@@ -182,7 +185,7 @@ public class AdminDashboardController implements Initializable {
             pst.setString(4, usrname);
             pst.executeUpdate();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-		alert.setTitle("User Registationn");
+	    alert.setTitle("User Registationn");
 
 		
 		alert.setHeaderText("User Registation");
@@ -267,6 +270,8 @@ public class AdminDashboardController implements Initializable {
     @FXML
      public void home(MouseEvent event )throws IOException{
                 Parent fxml = FXMLLoader.load(getClass().getResource("../views/homeFXML.fxml"));
+                
+                  
                 contentStack.getChildren().removeAll();
                 contentStack.getChildren().setAll(fxml);
      }
@@ -281,15 +286,20 @@ public class AdminDashboardController implements Initializable {
 
   @FXML
     void bookPage(MouseEvent event) throws IOException {
-            Parent fxml = FXMLLoader.load(getClass().getResource("../views/BookFXML.fxml"));
+           Parent fxml = FXMLLoader.load(getClass().getResource("../views/BookFXML.fxml"));
+            
                 contentStack.getChildren().removeAll();
                 contentStack.getChildren().setAll(fxml);
   
+    }
+     public void setUsername(String username) {
+        getCurrentUser.setText(username);
     }
     
      @Override
     public void initialize(URL url, ResourceBundle rb) {
         table();
+        
     }    
     
     

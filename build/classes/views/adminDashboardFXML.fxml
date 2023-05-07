@@ -66,7 +66,7 @@
                   </ImageView>
                   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="149.0">
                      <children>
-                        <Label prefHeight="57.0" prefWidth="94.0" styleClass="shadow" stylesheets="@admindashboard.css" text="Username" textFill="#968c8c">
+                        <Label fx:id="getCurrentUser" prefHeight="57.0" prefWidth="94.0" styleClass="shadow" stylesheets="@admindashboard.css" textFill="#968c8c">
                            <font>
                               <Font name="Bodoni MT Condensed" size="28.0" />
                            </font>

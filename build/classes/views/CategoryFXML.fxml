@@ -29,6 +29,7 @@
                      <children>
                         <Label layoutX="64.0" layoutY="61.0" text="Label" />
                         <TextField fx:id="labelinput" layoutX="80.0" layoutY="100.0" />
+                        <TextField fx:id="idinput" layoutX="109.0" layoutY="57.0" />
                      </children>
                   </AnchorPane>
                   <HBox prefHeight="100.0" prefWidth="200.0">
@@ -48,6 +49,7 @@
                   <TableView fx:id="catTable" prefHeight="200.0" prefWidth="200.0">
                     <columns>
                       <TableColumn fx:id="labelColumn" prefWidth="169.60003054141998" text="Label" />
+                        <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />
                     </columns>
                   </TableView>
                </children>

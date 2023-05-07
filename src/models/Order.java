@@ -1,44 +1,52 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import models.Book;
+import models.LoginModel;
 
-/**
- *
- * @author user
- */
 public class Order {
-    
-    private User user;
-    private List<Book> books;
 
-    public Order(User user, List<Book> books) {
-        this.user = user;
-        this.books = books;
+    private int quantity;
+    private String book_id, user_id;
+    private LocalDateTime dateTime;
+
+    public Order(int quantity, String book_id, String user_id, LocalDateTime dateTime) {
+        this.quantity = quantity;
+        this.book_id = book_id;
+        this.user_id = user_id;
+        this.dateTime = dateTime;
     }
 
-    public User getUser() {
-        return user;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public String getBook_id() {
+        return book_id;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public void setBook_id(String book_id) {
+        this.book_id = book_id;
     }
-    
-    
-    
-    
-    
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
 }

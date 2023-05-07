@@ -2,16 +2,20 @@ package controllers;
 
 import connectivity.ConnectionClass;
 import java.awt.datatransfer.StringSelection;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import javafx.collections.FXCollections;
@@ -23,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionModel;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -39,6 +44,7 @@ import javafx.stage.Stage;
 import models.Book;
 import models.Category;
 import models.Status;
+import org.controlsfx.control.PropertySheet.Item;
 
 public class BookFXMLController implements Initializable {
 
@@ -109,8 +115,8 @@ public class BookFXMLController implements Initializable {
     @FXML
     private TableColumn<Book, String> yearColumn;
 
-     @FXML
-    private TableColumn<Book,ImageView> imgColumn;
+    @FXML
+    private TableColumn<Book, Image> imgColumn;
 
     @FXML
     private TextField yearInput;
@@ -198,31 +204,36 @@ public class BookFXMLController implements Initializable {
             ConnectionClass connectionClass = new ConnectionClass();
             Connection connection = connectionClass.getConnection();
 
-            PreparedStatement pst = connection.prepareStatement("INSERT INTO `livre`( `ref`,`title`, `description`, `status`, `category`, `Pages`, `Language`, `Year`, `price`, `author`,`image`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement pstCat = connection.prepareStatement("SELECT id FROM category where label=?");
+            pstCat.setString(1, categoryInput.getValue());
+            ResultSet rs = pstCat.executeQuery();
+            while (rs.next()) {
+                int idCat = rs.getInt("id");
+                PreparedStatement pst = connection.prepareStatement("INSERT INTO `livre`( `ref`,`title`, `description`, `status`, `category`, `Pages`, `Language`, `Year`, `price`, `author`,`image`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 
-            pst.setString(1, re);
-            pst.setString(2, tit);
-            pst.setString(3, descri);
-            pst.setString(4, StatusInput.getValue().toString());
-            pst.setObject(5, categoryInput.getValue());
-            pst.setInt(6, pag);
-            pst.setString(7, lan);
-            pst.setInt(8, yr);
-            pst.setString(9, pri);
-            pst.setString(10, auth);
-            fis = new FileInputStream(file);
-            pst.setBinaryStream(11, fis, file.length());
+                pst.setString(1, re);
+                pst.setString(2, tit);
+                pst.setString(3, descri);
+                pst.setString(4, StatusInput.getValue().toString());
+                pst.setObject(5, idCat);
+                pst.setInt(6, pag);
+                pst.setString(7, lan);
+                pst.setInt(8, yr);
+                pst.setString(9, pri);
+                pst.setString(10, auth);
+                fis = new FileInputStream(file);
+                pst.setBinaryStream(11, fis, file.length());
 
-            pst.executeUpdate();
+                pst.executeUpdate();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Book Registation");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Book Registation");
 
-            alert.setHeaderText("Book Registation");
-            alert.setContentText("Record Addedddd!");
+                alert.setHeaderText("Book Registation");
+                alert.setContentText("Record Addedddd!");
 
-            alert.showAndWait();
-
+                alert.showAndWait();
+            }
             refInput.setText("");
             titleinput.setText("");
             Descriptioninput.setText("");
@@ -245,6 +256,80 @@ public class BookFXMLController implements Initializable {
 
     }
 
+    /*  @FXML
+    public void addClick(MouseEvent event) throws FileNotFoundException {
+        String re, tit, descri, auth, lan;
+        int pag, yr;
+        String pri;
+
+        re = refInput.getText();
+        tit = titleinput.getText();
+        descri = Descriptioninput.getText();
+        auth = authorInput.getText();
+        lan = LanguageInput.getText();
+        pag = Integer.parseInt(pagesInput.getText());
+        yr = Integer.parseInt(yearInput.getText());
+        pri = price.getText();
+        try {
+            ConnectionClass connectionClass = new ConnectionClass();
+            Connection connection = connectionClass.getConnection();
+
+            PreparedStatement pstCat = connection.prepareStatement("SELECT id FROM category where label=?");
+            pstCat.setString(1, categoryInput.getValue());
+            ResultSet rs = pstCat.executeQuery();
+
+            if (rs.next()) {
+
+                int idCat = rs.getInt("id");
+
+                PreparedStatement pst = connection.prepareStatement("INSERT INTO `livre`( `ref`,`title`, `description`, `status`, `category`, `Pages`, `Language`, `Year`, `price`, `author`,`image`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+
+                pst.setString(1, re);
+                pst.setString(2, tit);
+                pst.setString(3, descri);
+                pst.setString(4, StatusInput.getValue().toString());
+                pst.setObject(5, idCat);
+                pst.setInt(6, pag);
+                pst.setString(7, lan);
+                pst.setInt(8, yr);
+                pst.setString(9, pri);
+                pst.setString(10, auth);
+                fis = new FileInputStream(file);
+                pst.setBinaryStream(11, fis, file.length());
+
+                pst.executeUpdate();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Book Registation");
+
+                alert.setHeaderText("Book Registation");
+                alert.setContentText("Record Addedddd!");
+
+                alert.showAndWait();
+            table();
+            }
+            refInput.setText("");
+            titleinput.setText("");
+            Descriptioninput.setText("");
+            authorInput.setText("");
+
+            price.setText("");
+            pagesInput.setText("");
+            LanguageInput.setText("");
+            yearInput.setText("");
+            imgInput.setImage(imageVide);
+            textArea.setText("");
+            categoryInput.getSelectionModel().clearSelection();
+            StatusInput.getSelectionModel().clearSelection();
+
+        } catch (SQLException ex) {
+            System.out.println("add catch");
+            System.out.println(ex.toString());
+        }
+
+    }
+
+     */
     @FXML
     void deleteClick(MouseEvent event) {
         myIndex = bookTable.getSelectionModel().getSelectedIndex();
@@ -267,7 +352,7 @@ public class BookFXMLController implements Initializable {
 
             alert.showAndWait();
             table();
-               refInput.setText("");
+            refInput.setText("");
             titleinput.setText("");
             Descriptioninput.setText("");
             price.setText("");
@@ -280,7 +365,6 @@ public class BookFXMLController implements Initializable {
             categoryInput.getSelectionModel().clearSelection();
             StatusInput.getSelectionModel().clearSelection();
 
-
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
@@ -288,11 +372,11 @@ public class BookFXMLController implements Initializable {
     }
 
     @FXML
-    void updateBtn(MouseEvent event) {
+    void updateBtn(MouseEvent event) throws SQLException {
         String re, tit, descri, auth, lan;
         String pag, yr;
-        String pri, sat, cat;
-        
+        String pri, sat, selectedCategoryLabel;
+
         myIndex = bookTable.getSelectionModel().getSelectedIndex();
 
         re = bookTable.getItems().get(myIndex).getRef();
@@ -304,12 +388,23 @@ public class BookFXMLController implements Initializable {
         yr = yearInput.getText();
         pri = price.getText();
         sat = StatusInput.getValue().toString();
-        cat = categoryInput.getValue().toString();
+        selectedCategoryLabel = categoryInput.getValue();
         try {
 
             ConnectionClass connectionClass = new ConnectionClass();
             Connection con = connectionClass.getConnection();
 
+            // Use a prepared statement to retrieve the corresponding category id from the database
+            String sql = "SELECT id FROM category WHERE label=?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, selectedCategoryLabel);
+            ResultSet rs = stmt.executeQuery();
+            int selectedCategoryId = 0;
+            System.out.println("titre " + tit);
+
+            if (rs.next()) {
+                selectedCategoryId = rs.getInt("id");
+            }
             PreparedStatement pst = con.prepareStatement("update livre set title = ?,description = ? ,author = ?, Pages=?, price=?, year=?,  Language =?,status=?,category=?  where ref = ? ");
 
             pst.setString(1, tit);
@@ -320,11 +415,11 @@ public class BookFXMLController implements Initializable {
             pst.setString(6, yr);
             pst.setString(7, lan);
             pst.setString(8, sat);
-            pst.setString(9, cat);
+            pst.setInt(9, selectedCategoryId);
 
             pst.setString(10, re);
-
             pst.executeUpdate();
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Book Registationn");
 
@@ -332,7 +427,9 @@ public class BookFXMLController implements Initializable {
             alert.setContentText("Updateddd!");
 
             alert.showAndWait();
+
             table();
+
             refInput.setText("");
             titleinput.setText("");
             Descriptioninput.setText("");
@@ -355,28 +452,32 @@ public class BookFXMLController implements Initializable {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
         ObservableList<Book> livres = FXCollections.observableArrayList();
-        imgColumn.setPrefWidth(100);
-        ImageView imageView = new ImageView();
-
+        int idCat;
+        String labCat;
+        ImageView imageVie = null;
         try {
-            PreparedStatement pst = connection.prepareStatement("SELECT ref,title,description,Pages,category,status,language, Year, price, author,image FROM livre");
-            ResultSet rs = pst.executeQuery();
-            {
+
+            PreparedStatement pstCat = connection.prepareStatement("SELECT id,label FROM category");
+            ResultSet rst = pstCat.executeQuery();
+
+            if (rst.next()) {
+
+                labCat = rst.getString("label");
+                idCat = rst.getInt("id");
+
+                PreparedStatement pst = connection.prepareStatement("SELECT ref,title,description,Pages,category,status,language, Year, price, author,image FROM livre");
+                ResultSet rs = pst.executeQuery();
                 while (rs.next()) {
                     int i = 1;
-                    
-                    
-                       byte[] imageData = rs.getBytes("image");
-                    ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+                    Blob blob = rs.getBlob("image");
+                    InputStream inputStream = blob.getBinaryStream();
+                    Image img = new Image(inputStream);
 
-    // Create an Image from the ByteArrayInputStream
-    Image image = new Image(bis);
+                    imageVie = new ImageView(img);
+                    imageVie.setFitWidth(40);
+                    imageVie.setFitHeight(40);
 
-    // Set the Image as the source for an ImageView
-    ImageView imageVi = new ImageView(image);
-    imgInput.setImage(image);
-
-                 
+                    //imageVie.setImage(image);
                     Book livre = new Book();
                     livre.setRef(rs.getString("ref"));
                     livre.setTitle(rs.getString("title"));
@@ -387,86 +488,109 @@ public class BookFXMLController implements Initializable {
                     livre.setLanguage(rs.getString("language"));
                     livre.setYear(rs.getInt("Year"));
                     livre.setPrice(rs.getFloat("price"));
-
                     livre.setAuthor(rs.getString("author"));
-                    livre.setImage(rs.getString("image"));
+
+                    livre.setImage(img);
 
                     livres.add(livre);
                 }
-            }
+                bookTable.setItems(livres);
+                refColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("ref"));
+                priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-            bookTable.setItems(livres);
-            refColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("ref"));
-            priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+                titleColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+                descriptionColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("description"));
+                pagesColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("Pages"));
+                categoryColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("category"));
 
-            titleColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
-            descriptionColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("description"));
-            pagesColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("Pages"));
-            categoryColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("category"));
+                statusColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("status"));
 
-            statusColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("status"));
+                languageColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("Language"));
 
-            languageColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("Language"));
+                yearColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("Year"));
+                authorColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
 
-            yearColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("Year"));
-            authorColumn.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
-            imgColumn.setCellValueFactory(new PropertyValueFactory<Book, ImageView>("image"));
-         //   imgColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
-            
-        } catch (SQLException ex) {
+                imgColumn.setCellValueFactory(new PropertyValueFactory<Book, Image>("image"));
+                //imgColumn.setGraphic(imageVie);
+   
+                   imgColumn.setCellFactory(column -> new TableCell<Book, Image>() {
+    private final ImageView imageView = new ImageView();
+ 
+    @Override
+    protected void updateItem(Image item, boolean empty) {
+        super.updateItem(item, empty);
+ 
+        if (item == null || empty) {
+            setGraphic(null);
+        } else {
+            imageView.setImage(item);
+            imageView.setFitWidth(40);
+            imageView.setFitHeight(40);
+            setGraphic(imageView);
+        }
+    }
+});
+    
+                    
+                    //   imgColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
+                    //  }
+                }
+            }catch (SQLException ex) {
             System.out.println(ex.toString());
         }
 
-        bookTable.setRowFactory(tv -> {
-            TableRow<Book> myRow = new TableRow<>();
-            myRow.setOnMouseClicked(event
-                    -> {
-                if (event.getClickCount() == 1 && (!myRow.isEmpty())) {
-                    myIndex = bookTable.getSelectionModel().getSelectedIndex();
-                    refInput.setText(bookTable.getItems().get(myIndex).getRef());
-                    price.setText(Float.toString(bookTable.getItems().get(myIndex).getPrice()));
-                    titleinput.setText(bookTable.getItems().get(myIndex).getTitle());
-                    Descriptioninput.setText(bookTable.getItems().get(myIndex).getDescription());
+            bookTable.setRowFactory(tv -> {
+                TableRow<Book> myRow = new TableRow<>();
+                myRow.setOnMouseClicked(event
+                        -> {
+                    if (event.getClickCount() == 1 && (!myRow.isEmpty())) {
+                        myIndex = bookTable.getSelectionModel().getSelectedIndex();
+                        refInput.setText(bookTable.getItems().get(myIndex).getRef());
+                        price.setText(Float.toString(bookTable.getItems().get(myIndex).getPrice()));
+                        titleinput.setText(bookTable.getItems().get(myIndex).getTitle());
+                        Descriptioninput.setText(bookTable.getItems().get(myIndex).getDescription());
 
-                    authorInput.setText(bookTable.getItems().get(myIndex).getAuthor());
-                    LanguageInput.setText(bookTable.getItems().get(myIndex).getLanguage());
-                    pagesInput.setText(Integer.toString(bookTable.getItems().get(myIndex).getPages()));
-                    yearInput.setText(Integer.toString(bookTable.getItems().get(myIndex).getYear()));
+                        authorInput.setText(bookTable.getItems().get(myIndex).getAuthor());
+                        LanguageInput.setText(bookTable.getItems().get(myIndex).getLanguage());
+                        pagesInput.setText(Integer.toString(bookTable.getItems().get(myIndex).getPages()));
+                        yearInput.setText(Integer.toString(bookTable.getItems().get(myIndex).getYear()));
 
-                    String staString = bookTable.getItems().get(myIndex).getStatus();
-                    Status stau = Status.valueOf(staString);
-                    StatusInput.setValue(stau);
+                        String staString = bookTable.getItems().get(myIndex).getStatus();
+                        Status stau = Status.valueOf(staString);
+                        StatusInput.setValue(stau);
 
-                    String catString = bookTable.getItems().get(myIndex).getCategory();
-                    categoryInput.setValue(catString);
-                    
-                }
+                        String catString = bookTable.getItems().get(myIndex).getCategory();
+                        categoryInput.setValue(catString);
+                    }
 
+                });
+                return myRow;
             });
-            return myRow;
-        });
 
-    }
+        }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+        @Override
+        public void initialize
+        (URL url, ResourceBundle rb
+        
+            ) {
         table();
-        UnaryOperator<TextFormatter.Change> filter = change -> {
-            String input = change.getText();
-            if (input.matches("[0-9]*")) {
-                return change;
-            }
-            return null;
-        };
+            UnaryOperator<TextFormatter.Change> filter = change -> {
+                String input = change.getText();
+                if (input.matches("[0-9]*")) {
+                    return change;
+                }
+                return null;
+            };
 
-        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
-        TextFormatter<String> textFormatter1 = new TextFormatter<>(filter);
-        TextFormatter<String> textFormatter2 = new TextFormatter<>(filter);
+            TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+            TextFormatter<String> textFormatter1 = new TextFormatter<>(filter);
+            TextFormatter<String> textFormatter2 = new TextFormatter<>(filter);
 
-        //   priceInput.setTextFormatter(textFormatter);
-        pagesInput.setTextFormatter(textFormatter1);
-        yearInput.setTextFormatter(textFormatter2);
+            //   priceInput.setTextFormatter(textFormatter);
+            pagesInput.setTextFormatter(textFormatter1);
+            yearInput.setTextFormatter(textFormatter2);
+
+        }
 
     }
-
-}

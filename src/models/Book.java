@@ -8,6 +8,7 @@ package models;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 import models.Status;
 
 /**
@@ -22,7 +23,8 @@ public class Book {
     public StringProperty status;
     private int pages,year;
     private float price;
-    private StringProperty category,ref,image;
+    private StringProperty category,ref;
+            private Image image;
     
     public Book(){
         ref = new SimpleStringProperty(this,"ref");
@@ -32,7 +34,6 @@ public class Book {
         author = new SimpleStringProperty(this,"author");
         category=new SimpleStringProperty(this,"category");
         status= new SimpleStringProperty(this,"status");
-        image= new SimpleStringProperty(this,"image");
 
 
     }
@@ -40,9 +41,6 @@ public class Book {
          return title; 
     }
     
-    public StringProperty imageProperty() { 
-         return image; 
-    }
     
     public StringProperty categoryProperty() { 
          return category; 
@@ -77,16 +75,16 @@ public class Book {
     public void setTitle(String newtitle) {
         title.set(newtitle);
     }
-  
-      public String getImage() {
-        return this.image.get();
 
+    public Image getImage() {
+        return image;
     }
 
-    public void setImage(String newImage) {
-        image.set(newImage);
+    public void setImage(Image image) {
+        this.image = image;
     }
   
+    
       public String getRef() {
         return this.ref.get();
 

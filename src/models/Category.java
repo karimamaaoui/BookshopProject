@@ -13,9 +13,9 @@ import javafx.beans.property.StringProperty;
  * @author user
  */
 public class Category {
-
+    
      private final StringProperty label;
-     private String labe;
+     private int id;
      
     public Category()
     {
@@ -37,5 +37,15 @@ public Category(String label) {
     public static Category valueOf(String lab) {
         return new Category(lab.toString());
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
     
 }

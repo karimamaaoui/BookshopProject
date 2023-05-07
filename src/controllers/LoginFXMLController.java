@@ -52,6 +52,7 @@ public class LoginFXMLController implements Initializable {
     
     
     LoginModel lg = new LoginModel();
+    String currentUser = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -90,13 +91,23 @@ public class LoginFXMLController implements Initializable {
                 
                    
                 ResultSet resultSet = pst.executeQuery();
-                if (resultSet.next()) {
+                if (resultSet.next()) {      
+                    currentUser = resultSet.getString("username");
+
                     role=resultSet.getString("role");
                 
                     if(role.equals("user")){
                 
-                    Parent parent = FXMLLoader.load(getClass().getResource("../views/homeFXML.fxml"));
-                    Scene scene = new Scene(parent);
+                   FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
+
+                       // Parent parent = FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
+                       Parent root = loader.load();
+
+                        AdminDashboardController controller = loader.getController();
+                        controller.setUsername(currentUser);
+                   
+                     //   Parent parent = FXMLLoader.load(getClass().getResource("../views/homeFXML.fxml"));
+                    Scene scene = new Scene(root);
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     window.setScene(scene);
                     window.show();
@@ -105,8 +116,16 @@ public class LoginFXMLController implements Initializable {
                 
                 else {
                     if(role.equals("admin")){
-                    Parent parent = FXMLLoader.load(getClass().getResource("../views/adminDashboardFXML.fxml"));
-                    Scene scene = new Scene(parent);
+                  /*  Parent parent = FXMLLoader.load(getClass().getResource("../views/adminDashboardFXML.fxml"));*/
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/adminDashboardFXML.fxml"));
+
+                       // Parent parent = FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
+                       Parent root = loader.load();
+
+                        AdminDashboardController controller = loader.getController();
+                        controller.setUsername(currentUser);
+                   
+                    Scene scene = new Scene(root);
                     Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     window.setScene(scene);
                     window.show();

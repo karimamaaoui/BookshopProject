@@ -3,12 +3,18 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="controllers.HomeFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeFXMLController">
     <stylesheets>
         <URL value="@homefxml.css" />
     </stylesheets>
    <children>
       <Label layoutX="530.0" layoutY="272.0" text="Welecome" />
+      <Label fx:id="getCurrentUser" layoutX="611.0" layoutY="252.0" prefHeight="57.0" prefWidth="94.0" styleClass="shadow" stylesheets="@admindashboard.css" textFill="#968c8c">
+         <font>
+            <Font name="Bodoni MT Condensed" size="28.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
