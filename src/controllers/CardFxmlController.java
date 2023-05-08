@@ -51,8 +51,7 @@ public class CardFxmlController implements Initializable {
 
     @FXML
     private HBox box;
- @FXML
-    private Label getCurrentUser;
+ 
     private String currentUser;
 
     @FXML

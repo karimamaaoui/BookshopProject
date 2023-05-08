@@ -40,8 +40,7 @@ public class PaymentFXMLController implements Initializable {
 
     }
 
-      public void setUsername(String username) {
-        //getCurrentUser.setText(username);
+     public void setUsername(String username) {
          currentUser = username;
          currentUser = UserSession.getCurrentUsername();
 

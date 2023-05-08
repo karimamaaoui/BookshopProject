@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -72,7 +73,24 @@ public class HomeFXMLController implements Initializable {
         this.currentUser = username;
         currentUser = UserSession.getCurrentUsername();
     }
+ @FXML
+    void goToCard(ActionEvent event) throws IOException {
+   FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/PanierListFXML.fxml"));
 
+        // Parent parent = FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
+        Parent root = loader.load();
+
+        ListPanierFXMLController controller = loader.getController();
+        controller.setUsername(currentUser);
+              Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+       
+  
+
+    }
+   
     @FXML
     void cartPage(MouseEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/cardFxml.fxml"));
@@ -140,27 +158,6 @@ public class HomeFXMLController implements Initializable {
 
     }
 
-    @FXML
-    public void paymentPage(MouseEvent event) throws IOException {
-
-//    FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/paymentFXML.fxml"));
-        //  Parent root = loader.load();
-        //  PaymentFXMLController controller = loader.getController();
-        //      Parent root = FXMLLoader.load(getClass().getResource("../views/paymentFXML.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/paymentFXML.fxml"));
-
-        // Parent parent = FXMLLoader(getClass().getResource("../views/homeFXML.fxml"));
-        Parent root = loader.load();
-
-        PaymentFXMLController controller = loader.getController();
-        controller.setUsername(currentUser);
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
-
-    }
 
     public List<Book> Books() {
 
@@ -232,7 +229,7 @@ public class HomeFXMLController implements Initializable {
                 HBox cardBox = loader.load();
                 CardFxmlController controller = loader.getController();
                 controller.setUsername(currentUser);
-                System.out.println("current user from home" + currentUser);
+                //System.out.println("current user from home" + currentUser);
                 controller.setData(recentlyList.get(i));
                 cardLayout.getChildren().add(cardBox);
 

@@ -11,24 +11,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import models.Book;
 import models.Cart;
 import models.Category;
+import models.UserSession;
 
 public class ListPanierFXMLController implements Initializable {
 
-    
-      @FXML
+    @FXML
     private Button addBtn;
 
     @FXML
@@ -38,60 +43,105 @@ public class ListPanierFXMLController implements Initializable {
     private TableView<Cart> panierTable;
 
     @FXML
-    private TableColumn<Cart,Integer> qteColumn;
-
-    @FXML
-    private TextField qteInput;
-
-    @FXML
-    private TableColumn<Cart, String> refColumn;
-
-    @FXML
-    private TextField refInput;
-
-    @FXML
     private Button updateBtn;
 
     @FXML
-    private TableColumn<Cart, String> usernameColumn;
+    private TableColumn<Cart, Book> bookCol;
+
+    @FXML
+    private TableView<Cart> cartTable;
+
+    @FXML
+    private TableColumn<Cart, Float> priceCol;
+
+    @FXML
+    private TableColumn<Cart, Integer> quantityCol;
+
+    @FXML
+    private Label totalLabel;
 
     @FXML
     private TextField usernameinput;
-    
-        public void table() {
+    private String currentUser;
+
+    public void setUsername(String username) {
+        //getCurrentUser.setText(username);
+        currentUser = username;
+        currentUser = UserSession.getCurrentUsername();
+        //  usernameinput.setText(currentUser);
+
+    }
+
+    public void table() {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
         ObservableList<Cart> carts = FXCollections.observableArrayList();
         try {
-            PreparedStatement pst = connection.prepareStatement("SELECT * FROM panier");
-            ResultSet rs = pst.executeQuery();
 
+            PreparedStatement outerStatement = connection.prepareStatement("SELECT c.*, b.title, b.author, b.price, u.username "
+                    + "FROM panier c "
+                    + "JOIN livre b ON c.book_id = b.ref "
+                    + "JOIN user u ON u.username = c.user_id");
+            ResultSet outerResultSet = outerStatement.executeQuery();
             {
-                while (rs.next()) {
-                    
-                    Cart cat = new Cart(rs.getString("username"),rs.getInt("quantity"));
-                    
+                while (outerResultSet.next()) {
+                    PreparedStatement pst = connection.prepareStatement("SELECT * from livre where ref=?");
+                    pst.setString(1, outerResultSet.getString("book_id"));
+                    ResultSet rs1 = pst.executeQuery();
+                    System.out.println("book_id " + outerResultSet.getString("book_id"));
+                    while (rs1.next()) {
 
+                        //Cart cat = new Cart(outerResultSet.getString("user_id"), outerResultSet.getInt("quantity"), outerResultSet.getFloat("total"));
+                        System.out.println("fdsedsqd " + rs1.getString("ref"));
+                        Book book = new Book();
+                        book.setRef(rs1.getString("ref"));
+                        book.setTitle(rs1.getString("title"));
+                        book.setAuthor(rs1.getString("author"));
 
-                    carts.add(cat);
+                        // cat.addBook(book);
+                        Cart cat = new Cart(outerResultSet.getString("user_id"), outerResultSet.getInt("quantity"), outerResultSet.getFloat("total"), book);
+
+                        carts.add(cat);
+
+                    }
                 }
             }
             panierTable.setItems(carts);
-            refColumn.setCellValueFactory(new PropertyValueFactory<Cart,String>("book_id"));
+            //bookCol.setCellValueFactory(new PropertyValueFactory<Cart, String>("book"));
+            priceCol.setCellValueFactory(new PropertyValueFactory<Cart, Float>("total"));
+            quantityCol.setCellValueFactory(new PropertyValueFactory<Cart, Integer>("quantity"));
 
-            usernameColumn.setCellValueFactory(new PropertyValueFactory<Cart,String>("user_id"));
-            qteColumn.setCellValueFactory(new PropertyValueFactory<Cart,Integer>("quantity"));
+            bookCol.setCellValueFactory(cellData -> {
+                List<Book> books = cellData.getValue().getBooks();
+                return new SimpleObjectProperty<>(books != null && !books.isEmpty() ? books.get(0) : null);
+            });
+
+            bookCol.setCellFactory(column -> new TableCell<Cart, Book>() {
+                @Override
+                protected void updateItem(Book book, boolean empty) {
+                    super.updateItem(book, empty);
+
+                    if (empty || book == null) {
+
+                        setText("null");
+                    } else {
+                        setText(book.getTitle() + " by " + book.getAuthor());
+                    }
+                }
+            });
 
         } catch (SQLException ex) {
             System.out.println(ex.toString());
         }
 
-        
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        String currentUser = UserSession.getCurrentUsername();
+        System.out.println("current user from list panier " + currentUser);
+
         table();
-    }    
-    
+    }
+
 }

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import models.Book;
 import models.UserSession;
@@ -43,6 +44,11 @@ public class PanierFXMLController implements Initializable {
                 
                 statement.executeUpdate();
                 System.out.println("Book added to cart!");
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+            a.setAlertType(Alert.AlertType.CONFIRMATION);
+            a.setContentText("Book added to cart!");
+            a.show();
+       
             
         } catch (SQLException e) {
             System.out.println("Error adding book to cart: " + e.getMessage());

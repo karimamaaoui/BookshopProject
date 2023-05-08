@@ -8,6 +8,7 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -70,8 +71,10 @@ public class BookDetailsController implements Initializable {
         showBookDetails();
     }
 
+    
+    
     @FXML
-    public void addToCart() throws IOException {
+        void addToCart(ActionEvent event) throws IOException {
         //cart.addBook(selectedBook);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../views/panierFXML.fxml"));
 
